@@ -1,0 +1,53 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    # Runs a single command using the runners shell
+    - name: Setup npm
+      run: |
+        nvm install 12
+        node --version
+        npm --version
+        nvm --version      
+      
+    - name: Setup Webpack
+      run: npm install -g webpack
+
+    # Runs a set of commands using the runners shell
+    - name: Run a multi-line script
+      run: |
+        cd templates/static/
+        npm run build
+        
+  deploy:
+    - name: Rollbar deploy
+      uses: rollbar/github-deploy-action@1.1.0
+      with:
+        # Environment where is deployed
+        environment: production
+        # Version deployed
+        version: ${{ github.sha }}
+        # Deploy status
+        status: # optional, default is succeeded
+        env:
+          ROLLBAR_ACCESS_TOKEN: ${{ secrets.ROLLBAR_ACCESS_TOKEN }}
