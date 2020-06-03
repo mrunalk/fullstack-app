@@ -60,6 +60,6 @@ jobs:
         # Version deployed
         version: ${{ github.sha }}
         # Deploy status
-        status: # optional, default is succeeded
+        status: succeeded # optional, default is succeeded
         env:
           ROLLBAR_ACCESS_TOKEN: ${{ secrets.ROLLBAR_ACCESS_TOKEN }}
