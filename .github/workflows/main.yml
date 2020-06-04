@@ -51,7 +51,7 @@ jobs:
         npm install --save react-router-dom history
         
     # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
+    - name: npm run build
       run: |
         cd templates/static/
         npm run build
@@ -63,7 +63,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Rollbar deploy
-      uses: mrunalk/github-deploy-action@1.1.1
+      uses: mrunalk/github-deploy-action@1.1.2
       with:
         # Environment where is deployed
         environment: 'production'
