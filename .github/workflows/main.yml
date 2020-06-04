@@ -71,7 +71,7 @@ jobs:
         version: ${{ github.sha }}
         # Deploy status
         status: 'succeeded' # optional, default is succeeded
-        source_map: 'templates/public/bundle.js.map'
+        source_map: '../public/bundle.js.map'
         minified_url: '127.0.0.1:5000/public/bundle.js'
       env:
           ROLLBAR_ACCESS_TOKEN: ${{ secrets.ROLLBAR_ACCESS_TOKEN }}
