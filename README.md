@@ -1,3 +1,3 @@
-# react-flask-fullstack
+# Fullstack app which uses React.js, Flask, Python, npm and Webpack
 
-![.github/workflows/main.yml](https://github.com/mrunalk/react-flask-fullstack/workflows/.github/workflows/main.yml/badge.svg?branch=master)
+![CI](https://github.com/mrunalk/fullstack-app/workflows/CI/badge.svg)
