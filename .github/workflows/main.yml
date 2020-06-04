@@ -55,11 +55,6 @@ jobs:
       run: |
         cd templates/static/
         npm run build
-        curl -v https://api.rollbar.com/api/1/sourcemap \
-            -F access_token=${{ secrets.ROLLBAR_ACCESS_TOKEN }} \
-            -F version=${{ github.sha }} \
-            -F minified_url=127.0.0.1:5000/public/bundle.js \
-            -F source_map=@../public/bundle.js.map
         
   deploy:
     needs: build
@@ -68,7 +63,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Rollbar deploy
-      uses: rollbar/github-deploy-action@1.1.0
+      uses: mrunalk/github-deploy-action@1.1.3
       with:
         # Environment where is deployed
         environment: 'production'
@@ -76,5 +71,7 @@ jobs:
         version: ${{ github.sha }}
         # Deploy status
         status: 'succeeded' # optional, default is succeeded
+        source_map: 'templates/public/bundle.js.map'
+        minified_url: '127.0.0.1:5000/public/bundle.js'
       env:
           ROLLBAR_ACCESS_TOKEN: ${{ secrets.ROLLBAR_ACCESS_TOKEN }}
