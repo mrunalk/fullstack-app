@@ -66,12 +66,12 @@ jobs:
       uses: mrunalk/github-deploy-action@1.1.3
       with:
         # Environment where is deployed
-        environment: 'production'
+        environment: production
         # Version deployed
         version: ${{ github.sha }}
         # Deploy status
-        status: 'succeeded' # optional, default is succeeded
-        source_map: '../public/bundle.js.map'
-        minified_url: '127.0.0.1:5000/public/bundle.js'
+        status: succeeded # optional, default is succeeded
+        source_map: ../public/bundle.js.map
+        minified_url: 127.0.0.1:5000/public/bundle.js
       env:
           ROLLBAR_ACCESS_TOKEN: ${{ secrets.ROLLBAR_ACCESS_TOKEN }}
