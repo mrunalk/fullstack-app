@@ -1,7 +1,5 @@
 # This is a basic workflow to help you get started with Actions
-
 name: CI
-
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
@@ -25,37 +23,20 @@ jobs:
     # Runs a single command using the runners shell
     - name: Setup Node.js environment
       uses: actions/setup-node@v1.4.2
-      with:
-        # Set always-auth in npmrc
-        always-auth: # optional, default is false
-        # Version Spec of the version to use.  Examples: 10.x, 10.15.1, >=10.15.0
-        node-version: # optional, default is 10.x
-        # Optional registry to set up for auth. Will set the registry in a project level .npmrc and .yarnrc file, and set up auth to read in from env.NODE_AUTH_TOKEN
-        registry-url: # optional
-        # Optional scope for authenticating against scoped registries
-        scope: # optional
-        # Deprecated. Use node-version instead. Will not be supported after October 1, 2019
-        version: # optional
       
-    - name: Setup Webpack
+    - name: Setup Webpack and React
       run: |
         npm install --save-dev webpack 
         npm install -D webpack-cli
         npm install uglifyjs-webpack-plugin --save-dev
         npm install --save-dev babel-core babel-preset-es2015 babel-preset-react
         npm install babel-loader@^7 --save-dev
-    
-    - name: Setup React
-      run: |
         npm i react react-dom --save-dev
         npm install --save react-router-dom history
         
     # Runs a set of commands using the runners shell
     - name: npm run build
-      run: |
-        cd templates/static/
-        npm run build
-        cd ../../
+      run: npm run build --prefix templates/static/
         
     - uses: actions/upload-artifact@v2
       with:
@@ -74,9 +55,9 @@ jobs:
         name: bundle.js.map
 
     - name: Rollbar deploy
-      uses: mrunalk/github-deploy-action@1.1.3
+      uses: mrunalk/github-deploy-action@1.1.4
       with:
-        # Environment where is deployed
+        # Environment where your code is running. e.g. production
         environment: production
         # Version deployed
         version: ${{ github.sha }}
