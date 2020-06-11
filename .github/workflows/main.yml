@@ -71,6 +71,6 @@ jobs:
         # Deploy status
         status: succeeded # optional, default is succeeded
         source_map: bundle.js.map bundle.js
-        minified_url: 127.0.0.1:5000/public/bundle.js 127.0.0.1:5000/public/bundle.js
+        minified_url: 127.0.0.1:5000/public/bundle.js 127.0.0.1:5000/public/bundle2.js
       env:
           ROLLBAR_ACCESS_TOKEN: ${{ secrets.ROLLBAR_ACCESS_TOKEN }}
