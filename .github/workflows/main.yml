@@ -62,7 +62,7 @@ jobs:
       with:
         name: bundle.js
     - name: Rollbar deploy
-      uses: mrunalk/github-deploy-action@1.1.5
+      uses: mrunalk/github-deploy-action@1.1.6
       with:
         # Environment where your code is running. e.g. production
         environment: production
@@ -70,7 +70,7 @@ jobs:
         version: ${{ github.sha }}
         # Deploy status
         status: succeeded # optional, default is succeeded
-        source_map: bundle.js.map bundle.js
-        minified_url: 127.0.0.1:5000/public/bundle.js 127.0.0.1:5000/public/bundle2.js
+        source_maps: bundle.js.map
+        minified_urls: 127.0.0.1:5000/public/bundle.js
       env:
           ROLLBAR_ACCESS_TOKEN: ${{ secrets.ROLLBAR_ACCESS_TOKEN }}
