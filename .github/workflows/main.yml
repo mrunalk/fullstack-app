@@ -55,7 +55,7 @@ jobs:
         name: bundle.js.map
 
     - name: Rollbar deploy
-      uses: mrunalk/github-deploy-action@1.1.4
+      uses: rollbar/github-deploy-action@2.0.0
       with:
         # Environment where your code is running. e.g. production
         environment: production
